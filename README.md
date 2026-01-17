@@ -18,4 +18,6 @@ Ziel des Projekts ist es, eine Plattform bereitzustellen, die es derzeit **so no
 ## Technologie
 - **Backend:** Python
 - **Frontend:** HTML / CSS / JavaScript
+- **Deploy:** Render (Backend)
+- 
 
