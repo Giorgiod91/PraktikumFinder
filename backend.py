@@ -5,6 +5,33 @@ from companies import all_companies
 
 from fastapi import FastAPI
 
+from fastapi.middleware.cors import CORSMiddleware
+
+
+#initialize app
+
+
+app = FastAPI()
+
+
+
+# handle corsBlock for frontend
+
+origins = [
+        "http://localhost:3000",
+        ]
+
+app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+        )
+
+
+
+
 
 
 # Create a Class and type for the inputs
@@ -17,13 +44,6 @@ class User_input:
 
 
 
-    
-
-
-
-#initalize Fast API
-
-app = FastAPI()
 #@
 # creatine a route to display the companies
 @app.get("/companies")
