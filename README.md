@@ -1,7 +1,7 @@
 # PraktikumFinder
 
 **Beschreibung:**  
-PraktikumFinder ist eine kleine Web-App, die angehenden Fachinformatikern Anwendungsentwicklung und Umschülern hilft, **passende Betriebe für ein Praktikum** zu finden.  
+PraktikumFinder ist eine kleine Web-App, die angehenden Umschülern zum Fachinformatikern Anwendungsentwicklung , **passende Betriebe für das Pflicht Praktikum** zu finden.  
 Ziel des Projekts ist es, eine Plattform bereitzustellen, die es derzeit **so noch nicht gibt**, sodass zukünftige Umschüler direkt sehen können, **wo sie sich bewerben können**.
 
 ## Funktionen
