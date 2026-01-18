@@ -22,9 +22,9 @@ Ziel des Projekts ist es, eine Plattform bereitzustellen, die es derzeit **so no
 ## Technologie
 - **Backend:** Python
 - **Frontend:** HTML / CSS / JavaScript
-- **Deploy:** Render (Backend)
+- **Deploy:** Railway 
 - **Ping:** uptimerobot pings damit mein backend nicht in sleep geht bei der free version
 
 ## Challenge
-- Der Free Plan von Render lässt das Backend nach 15Min in den Sleep Modus gehen, deshalb verwende ich uptimerobot das die URL immer anpingt
+- Der Free Plan von Render lässt das Backend nach 15Min in den Sleep Modus gehen deshalb auf Railway deployed
 
