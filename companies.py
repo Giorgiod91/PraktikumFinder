@@ -40,6 +40,18 @@ all_companies = [
         "homepage": "www.dignes.de",
         "hinweis": "Durch IHK Bestätigt",
         "category": "normal"
+    },{
+        "name": "Die Zentrale Polizeidirektion Niedersachsen ",
+        "kontakt": "Daphne Grytzan",
+        "strasse": "Tannenbergallee 11",
+        "plz": "30163",
+        "ort": "Hannover",
+        "telefon": "0511-9695-1266",
+        "email": "karriere@zpd.polizei.niedersachsen.de",
+        "homepage": "https://www.zpd.polizei-nds.de/startseite/",
+        "hinweis": "Durch IHK Bestätigt",
+        "category": "normal"
+
     },
     {
         "name": "Digital cuisine GmbH & Co. KG",
