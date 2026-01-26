@@ -48,7 +48,7 @@ class User_input:
 # creatine a route to display the companies
 @app.get("/companies")
 # this it a function that displays the companies
-def get_companies():
+def get_companies(ort: str | None = None , plz: int | None = None):
     companies_to_display = []
     for i in all_companies:
         companies_to_display.append(i)
