@@ -1,5 +1,5 @@
 # PraktikumFinder
-<img width="1077" height="954" alt="image" src="https://github.com/user-attachments/assets/89313d59-a8a5-4cb0-8b67-73a42a6b4e75" />
+ LIVE https://praktikumsfinder.vercel.app/
 
 
 **Beschreibung:**  
@@ -17,9 +17,14 @@ Ziel des Projekts ist es, eine Plattform bereitzustellen, die es derzeit **so no
 - Umschüler, die eine Ausbildung zum Fachinformatiker Anwendungsentwicklung beginnen möchten
 - Studierende oder Praktikanten, die nach passenden Ausbildungsbetrieben suchen
 
+
+
 ## Technologie
 - **Backend:** Python
 - **Frontend:** HTML / CSS / JavaScript
-- **Deploy:** Render (Backend)
-- 
+- **Deploy:** Railway 
+- **Ping:** uptimerobot pings damit mein backend nicht in sleep geht bei der free version
+
+## Challenge
+- Der Free Plan von Render lässt das Backend nach 15Min in den Sleep Modus gehen deshalb auf Railway deployed
 
