@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { Search, MapPin, X } from "lucide-react";
+import { SlidersHorizontal } from "lucide-react";
 import { companies, uniqueOrte } from "../data/companies";
 import CompanyCard from "./CompanyCard";
+import SearchBar from "./SearchBar";
+import FilterBar from "./FilterBar";
 
 export default function CompanyList() {
   const [query, setQuery] = useState("");
@@ -23,61 +25,49 @@ export default function CompanyList() {
     });
   }, [query, selectedOrt]);
 
+  const hasFilters = !!query || !!selectedOrt;
+
   return (
     <div>
-      {/* Search + filter bar */}
-      <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-600" />
-          <input
-            type="text"
-            placeholder="Name, PLZ, Ort…"
+      {/* Toolbar */}
+      <div className="mb-6 space-y-3">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+          <SearchBar
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="w-full rounded-lg border border-white/6 bg-white/[0.03] py-2.5 pl-9 pr-4 font-mono text-sm text-white placeholder-slate-600 outline-none transition-colors focus:border-orange-500/30 focus:bg-white/[0.05]"
+            onChange={setQuery}
+            placeholder="Name, PLZ, Ort, Ansprechpartner…"
           />
-          {query && (
-            <button
-              onClick={() => setQuery("")}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-600 hover:text-white"
-            >
-              <X className="h-3.5 w-3.5" />
-            </button>
-          )}
+          <div className="flex items-center gap-2 text-slate-600 sm:hidden">
+            <SlidersHorizontal className="h-4 w-4" />
+            <span className="font-mono text-xs">Filter</span>
+          </div>
         </div>
 
-        <div className="flex flex-wrap gap-2">
-          <button
-            onClick={() => setSelectedOrt(null)}
-            className={`rounded-lg border px-3 py-1.5 font-mono text-xs transition-all ${
-              !selectedOrt
-                ? "border-orange-500/40 bg-orange-500/10 text-orange-300"
-                : "border-white/6 text-slate-500 hover:border-white/12 hover:text-white"
-            }`}
-          >
-            Alle
-          </button>
-          {uniqueOrte.map((ort) => (
-            <button
-              key={ort}
-              onClick={() => setSelectedOrt(ort === selectedOrt ? null : ort)}
-              className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 font-mono text-xs transition-all ${
-                selectedOrt === ort
-                  ? "border-orange-500/40 bg-orange-500/10 text-orange-300"
-                  : "border-white/6 text-slate-500 hover:border-white/12 hover:text-white"
-              }`}
-            >
-              <MapPin className="h-3 w-3" />
-              {ort}
-            </button>
-          ))}
-        </div>
+        <FilterBar
+          orte={uniqueOrte}
+          selected={selectedOrt}
+          onSelect={setSelectedOrt}
+        />
       </div>
 
-      {/* Count */}
-      <p className="mb-5 font-mono text-xs text-slate-600">
-        {filtered.length} von {companies.length} Firmen
-      </p>
+      {/* Result count */}
+      <div className="mb-5 flex items-center justify-between">
+        <p className="font-mono text-xs text-slate-600">
+          <span className="text-slate-400">{filtered.length}</span> von{" "}
+          {companies.length} Firmen
+        </p>
+        {hasFilters && (
+          <button
+            onClick={() => {
+              setQuery("");
+              setSelectedOrt(null);
+            }}
+            className="font-mono text-xs text-orange-400/70 underline underline-offset-2 transition-colors hover:text-orange-400"
+          >
+            Filter zurücksetzen
+          </button>
+        )}
+      </div>
 
       {/* Grid */}
       {filtered.length > 0 ? (
@@ -87,16 +77,22 @@ export default function CompanyList() {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center py-20 text-center">
-          <p className="font-mono text-sm text-slate-600">
-            Keine Firmen gefunden.
+        <div className="flex flex-col items-center rounded-2xl border border-white/5 bg-white/[0.01] py-24 text-center">
+          <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-white/8 bg-white/[0.03]">
+            <SlidersHorizontal className="h-5 w-5 text-slate-600" />
+          </div>
+          <p className="font-mono text-sm text-slate-500">
+            Keine Firmen gefunden
+          </p>
+          <p className="mt-1 font-mono text-xs text-slate-700">
+            Versuche andere Suchbegriffe
           </p>
           <button
             onClick={() => {
               setQuery("");
               setSelectedOrt(null);
             }}
-            className="mt-3 font-mono text-xs text-orange-400 hover:text-orange-300"
+            className="mt-4 rounded-lg border border-orange-500/20 bg-orange-500/8 px-4 py-2 font-mono text-xs text-orange-400 transition-all hover:border-orange-500/40 hover:text-orange-300"
           >
             Filter zurücksetzen
           </button>
