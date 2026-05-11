@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import { companies, uniqueOrte } from "../data/companies";
 import CompanyCard from "./CompanyCard";
+import AdCard from "./AdCard";
 import SearchBar from "./SearchBar";
 import FilterBar from "./FilterBar";
 
@@ -67,7 +68,15 @@ export default function CompanyList() {
       {filtered.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {filtered.map((company, i) => (
-            <CompanyCard key={company.name} company={company} index={i} />
+            <>
+              <CompanyCard
+                key={company.name}
+                company={company}
+                index={i}
+                featured={i < 3}
+              />
+              {i === 2 && <AdCard key="ad" index={3} />}
+            </>
           ))}
         </div>
       ) : (

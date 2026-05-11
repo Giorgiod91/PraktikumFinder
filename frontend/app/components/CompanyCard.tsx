@@ -42,9 +42,11 @@ function InfoRow({ icon, label }: { icon: React.ReactNode; label: string }) {
 export default function CompanyCard({
   company,
   index,
+  featured = false,
 }: {
   company: Company;
   index: number;
+  featured?: boolean;
 }) {
   const initials = company.name
     .split(" ")
@@ -53,16 +55,38 @@ export default function CompanyCard({
     .join("")
     .toUpperCase();
 
+  const rank = index + 1;
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3, delay: Math.min(index * 0.04, 0.6) }}
-      className="group flex flex-col rounded-2xl border border-gray-200 bg-white p-5 shadow-sm transition-all duration-200 hover:border-blue-300 hover:shadow-md hover:shadow-blue-100"
+      className={`group relative flex flex-col rounded-2xl border p-5 shadow-sm transition-all duration-200 ${
+        featured
+          ? "border-yellow-300 bg-gradient-to-br from-yellow-50 to-white shadow-yellow-100 hover:border-yellow-400 hover:shadow-md hover:shadow-yellow-100"
+          : "border-gray-200 bg-white hover:border-blue-300 hover:shadow-md hover:shadow-blue-100"
+      }`}
     >
+      {/* TOP badge */}
+      {featured && (
+        <div className="absolute -top-3 left-4 flex items-center gap-1 rounded-full border border-yellow-300 bg-yellow-400 px-2.5 py-0.5 shadow-sm">
+          <span className="text-[11px]">
+            {rank === 1 ? "🥇" : rank === 2 ? "🥈" : "🥉"}
+          </span>
+          <span className="text-[10px] font-bold text-yellow-900 uppercase tracking-wider">
+            Top {rank}
+          </span>
+        </div>
+      )}
+
       {/* Card header */}
-      <div className="mb-4 flex items-start gap-3">
-        <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl bg-blue-50 font-bold text-sm text-blue-600 ring-1 ring-blue-100">
+      <div className={`flex items-start gap-3 ${featured ? "mt-2 mb-4" : "mb-4"}`}>
+        <div className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl font-bold text-sm ring-1 ${
+          featured
+            ? "bg-yellow-100 text-yellow-700 ring-yellow-200"
+            : "bg-blue-50 text-blue-600 ring-blue-100"
+        }`}>
           {initials}
         </div>
         <div className="min-w-0">
