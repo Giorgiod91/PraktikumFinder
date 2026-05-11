@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, animate } from "framer-motion";
+import { motion, animate, type Variants } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { companies } from "../data/companies";
 
@@ -24,7 +24,7 @@ const container = {
   show: { transition: { staggerChildren: 0.12, delayChildren: 0.2 } },
 };
 
-const word = {
+const word: Variants = {
   hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
   show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } },
 };
