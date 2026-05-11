@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useMemo } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { companies, uniqueOrte } from "../data/companies";
 import CompanyCard from "./CompanyCard";
 import AdCard from "./AdCard";
@@ -65,42 +66,57 @@ export default function CompanyList() {
       </div>
 
       {/* Grid */}
-      {filtered.length > 0 ? (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((company, i) => (
-            <>
-              <CompanyCard
-                key={company.name}
-                company={company}
-                index={i}
-                featured={i < 3}
-              />
-              {i === 2 && <AdCard key="ad" index={3} />}
-            </>
-          ))}
-        </div>
-      ) : (
-        <div className="flex flex-col items-center rounded-2xl border border-gray-200 bg-white py-24 text-center">
-          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-50">
-            <span className="text-2xl">🔍</span>
-          </div>
-          <p className="text-sm font-semibold text-gray-700">
-            Keine Firmen gefunden
-          </p>
-          <p className="mt-1 text-xs text-gray-400">
-            Versuche andere Suchbegriffe
-          </p>
-          <button
-            onClick={() => {
-              setQuery("");
-              setSelectedOrt(null);
-            }}
-            className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700"
+      <AnimatePresence mode="popLayout">
+        {filtered.length > 0 ? (
+          <motion.div
+            key="grid"
+            layout
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
           >
-            Filter zurücksetzen
-          </button>
-        </div>
-      )}
+            {filtered.map((company, i) => (
+              <>
+                <CompanyCard
+                  key={company.name}
+                  company={company}
+                  index={i}
+                  featured={i < 3}
+                />
+                {i === 2 && <AdCard key="ad" index={3} />}
+              </>
+            ))}
+          </motion.div>
+        ) : (
+          <motion.div
+            key="empty"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="flex flex-col items-center rounded-2xl border border-gray-200 bg-white py-24 text-center"
+          >
+            <motion.div
+              animate={{ rotate: [0, -10, 10, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+              className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-50 text-2xl"
+            >
+              🔍
+            </motion.div>
+            <p className="text-sm font-semibold text-gray-700">
+              Keine Firmen gefunden
+            </p>
+            <p className="mt-1 text-xs text-gray-400">
+              Versuche andere Suchbegriffe
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => { setQuery(""); setSelectedOrt(null); }}
+              className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700"
+            >
+              Filter zurücksetzen
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

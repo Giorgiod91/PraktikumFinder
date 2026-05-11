@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 
 interface FilterBarProps {
@@ -11,12 +12,17 @@ interface FilterBarProps {
 export default function FilterBar({ orte, selected, onSelect }: FilterBarProps) {
   return (
     <div className="flex flex-wrap gap-2">
-      <FilterChip active={!selected} onClick={() => onSelect(null)}>
+      <FilterChip
+        id="alle"
+        active={!selected}
+        onClick={() => onSelect(null)}
+      >
         Alle
       </FilterChip>
       {orte.map((ort) => (
         <FilterChip
           key={ort}
+          id={ort}
           active={selected === ort}
           onClick={() => onSelect(selected === ort ? null : ort)}
           icon={<MapPin className="h-3 w-3" />}
@@ -33,23 +39,36 @@ function FilterChip({
   active,
   onClick,
   icon,
+  id,
 }: {
   children: React.ReactNode;
   active: boolean;
   onClick: () => void;
   icon?: React.ReactNode;
+  id: string;
 }) {
   return (
-    <button
+    <motion.button
       onClick={onClick}
-      className={`flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-medium transition-all ${
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className={`relative flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-medium transition-colors ${
         active
-          ? "border-blue-600 bg-blue-600 text-white shadow-sm shadow-blue-600/20"
+          ? "border-blue-600 text-white"
           : "border-gray-200 bg-white text-gray-600 hover:border-blue-300 hover:text-blue-600"
       }`}
     >
-      {icon}
-      {children}
-    </button>
+      {active && (
+        <motion.span
+          layoutId="filter-active-bg"
+          className="absolute inset-0 rounded-xl bg-blue-600"
+          transition={{ type: "spring", stiffness: 380, damping: 28 }}
+        />
+      )}
+      <span className="relative z-10 flex items-center gap-1.5">
+        {icon}
+        {children}
+      </span>
+    </motion.button>
   );
 }

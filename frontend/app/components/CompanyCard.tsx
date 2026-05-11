@@ -59,36 +59,48 @@ export default function CompanyCard({
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3, delay: Math.min(index * 0.04, 0.6) }}
-      className={`group relative flex flex-col rounded-2xl border p-5 shadow-sm transition-all duration-200 ${
+      layout
+      initial={{ opacity: 0, y: 24, scale: 0.96 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.92, y: -8 }}
+      whileHover={{ y: -6, transition: { duration: 0.2 } }}
+      whileTap={{ scale: 0.97 }}
+      transition={{ duration: 0.35, delay: Math.min(index * 0.05, 0.5), ease: [0.25, 0.46, 0.45, 0.94] }}
+      className={`group relative flex cursor-default flex-col rounded-2xl border p-5 shadow-sm ${
         featured
-          ? "border-yellow-300 bg-gradient-to-br from-yellow-50 to-white shadow-yellow-100 hover:border-yellow-400 hover:shadow-md hover:shadow-yellow-100"
-          : "border-gray-200 bg-white hover:border-blue-300 hover:shadow-md hover:shadow-blue-100"
+          ? "border-yellow-300 bg-gradient-to-br from-yellow-50 to-white shadow-yellow-100 hover:shadow-lg hover:shadow-yellow-200/60"
+          : "border-gray-200 bg-white hover:shadow-lg hover:shadow-blue-100/60"
       }`}
     >
       {/* TOP badge */}
       {featured && (
-        <div className="absolute -top-3 left-4 flex items-center gap-1 rounded-full border border-yellow-300 bg-yellow-400 px-2.5 py-0.5 shadow-sm">
+        <motion.div
+          initial={{ scale: 0, rotate: -12 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ type: "spring", stiffness: 400, damping: 15, delay: index * 0.05 + 0.3 }}
+          className="absolute -top-3 left-4 flex items-center gap-1 rounded-full border border-yellow-300 bg-yellow-400 px-2.5 py-0.5 shadow-sm"
+        >
           <span className="text-[11px]">
             {rank === 1 ? "🥇" : rank === 2 ? "🥈" : "🥉"}
           </span>
           <span className="text-[10px] font-bold text-yellow-900 uppercase tracking-wider">
             Top {rank}
           </span>
-        </div>
+        </motion.div>
       )}
 
       {/* Card header */}
       <div className={`flex items-start gap-3 ${featured ? "mt-2 mb-4" : "mb-4"}`}>
-        <div className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl font-bold text-sm ring-1 ${
-          featured
-            ? "bg-yellow-100 text-yellow-700 ring-yellow-200"
-            : "bg-blue-50 text-blue-600 ring-blue-100"
-        }`}>
+        <motion.div
+          whileHover={{ rotate: [0, -8, 8, 0], transition: { duration: 0.4 } }}
+          className={`flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-xl font-bold text-sm ring-1 ${
+            featured
+              ? "bg-yellow-100 text-yellow-700 ring-yellow-200"
+              : "bg-blue-50 text-blue-600 ring-blue-100"
+          }`}
+        >
           {initials}
-        </div>
+        </motion.div>
         <div className="min-w-0">
           <h3 className="text-sm font-semibold leading-snug text-gray-900">
             {company.name}
@@ -145,13 +157,15 @@ export default function CompanyCard({
       {/* CTA */}
       {company.email && (
         <div className="mt-4 border-t border-gray-100 pt-4">
-          <a
+          <motion.a
             href={`mailto:${company.email}`}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-2.5 text-xs font-semibold text-white shadow-sm shadow-blue-600/20 transition-all hover:bg-blue-700 hover:shadow-md hover:shadow-blue-600/30"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-2.5 text-xs font-semibold text-white shadow-sm shadow-blue-600/20 hover:bg-blue-700 hover:shadow-md hover:shadow-blue-600/30"
           >
             <Mail className="h-3.5 w-3.5" />
             Jetzt bewerben
-          </a>
+          </motion.a>
         </div>
       )}
     </motion.article>
