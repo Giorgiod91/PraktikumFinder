@@ -5,13 +5,13 @@ import CompanyList from "./components/CompanyList";
 
 export default function Home() {
   return (
-    <div className="flex min-h-screen flex-col bg-[#08080c] text-white">
+    <div className="flex min-h-screen flex-col bg-white text-gray-900">
       <Header />
 
       <main className="flex-1">
         <Hero />
 
-        <section className="px-5 py-12 sm:px-8">
+        <section className="bg-gray-50 px-5 py-14 sm:px-8">
           <div className="mx-auto max-w-7xl">
             <CompanyList />
           </div>

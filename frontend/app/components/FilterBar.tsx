@@ -11,10 +11,7 @@ interface FilterBarProps {
 export default function FilterBar({ orte, selected, onSelect }: FilterBarProps) {
   return (
     <div className="flex flex-wrap gap-2">
-      <FilterChip
-        active={!selected}
-        onClick={() => onSelect(null)}
-      >
+      <FilterChip active={!selected} onClick={() => onSelect(null)}>
         Alle
       </FilterChip>
       {orte.map((ort) => (
@@ -45,10 +42,10 @@ function FilterChip({
   return (
     <button
       onClick={onClick}
-      className={`flex items-center gap-1.5 rounded-xl border px-3 py-2 font-mono text-xs transition-all ${
+      className={`flex items-center gap-1.5 rounded-xl border px-3 py-2 text-xs font-medium transition-all ${
         active
-          ? "border-orange-500/40 bg-orange-500/10 text-orange-300 shadow-sm shadow-orange-500/5"
-          : "border-white/6 text-slate-500 hover:border-white/12 hover:bg-white/[0.03] hover:text-white"
+          ? "border-blue-600 bg-blue-600 text-white shadow-sm shadow-blue-600/20"
+          : "border-gray-200 bg-white text-gray-600 hover:border-blue-300 hover:text-blue-600"
       }`}
     >
       {icon}

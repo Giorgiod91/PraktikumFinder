@@ -7,9 +7,10 @@ export default function Hero() {
   const uniqueCities = [...new Set(companies.map((c) => c.ort))].length;
 
   return (
-    <section className="relative overflow-hidden border-b border-white/5 px-5 py-20 sm:px-8">
-      {/* Background glow */}
-      <div className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[600px] -translate-x-1/2 rounded-full bg-orange-500/5 blur-3xl" />
+    <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-blue-800 px-5 py-24 sm:px-8">
+      {/* Background decoration */}
+      <div className="pointer-events-none absolute -right-40 -top-40 h-96 w-96 rounded-full bg-white/5 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-blue-400/20 blur-3xl" />
 
       <div className="relative mx-auto max-w-7xl">
         <motion.div
@@ -17,9 +18,9 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-500/20 bg-orange-500/5 px-3 py-1">
-            <span className="h-1.5 w-1.5 rounded-full bg-orange-400 animate-pulse" />
-            <span className="font-mono text-[11px] tracking-widest text-orange-400 uppercase">
+          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 backdrop-blur-sm">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-green-400" />
+            <span className="text-xs font-semibold tracking-widest text-white/90 uppercase">
               IHK-bestätigte Betriebe
             </span>
           </div>
@@ -27,24 +28,21 @@ export default function Hero() {
           <h1 className="mb-5 text-4xl font-extrabold tracking-tight text-white sm:text-6xl">
             Dein Praktikumsplatz
             <br />
-            <span className="bg-gradient-to-br from-[#FF705B] via-[#FF9548] to-[#FFB457] bg-clip-text text-transparent">
-              in Hannover.
-            </span>
+            <span className="text-blue-200">in Hannover.</span>
           </h1>
 
-          <p className="max-w-lg text-sm leading-relaxed text-slate-500">
+          <p className="max-w-lg text-base leading-relaxed text-blue-100">
             {companies.length} geprüfte Unternehmen im Raum Hannover, die
             Praktikumsplätze für Umschüler anbieten — direkt filtern, Kontakt
             aufnehmen, loslegen.
           </p>
         </motion.div>
 
-        {/* Stats row */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-10 flex flex-wrap gap-6"
+          className="mt-12 flex flex-wrap gap-8"
         >
           {[
             { value: companies.length, label: "Unternehmen" },
@@ -52,12 +50,10 @@ export default function Hero() {
             { value: "100%", label: "IHK-bestätigt" },
           ].map((stat) => (
             <div key={stat.label} className="flex flex-col">
-              <span className="font-mono text-2xl font-bold text-white">
+              <span className="text-3xl font-extrabold text-white">
                 {stat.value}
               </span>
-              <span className="font-mono text-[11px] text-slate-600">
-                {stat.label}
-              </span>
+              <span className="text-sm text-blue-200">{stat.label}</span>
             </div>
           ))}
         </motion.div>

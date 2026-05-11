@@ -8,26 +8,26 @@ export default function Header() {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
-      className="sticky top-0 z-50 border-b border-white/5 bg-[#08080c]/80 px-5 py-4 backdrop-blur-md sm:px-8"
+      className="sticky top-0 z-50 border-b border-gray-200 bg-white/90 px-5 py-4 shadow-sm backdrop-blur-md sm:px-8"
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-orange-500/15 ring-1 ring-orange-500/30">
-            <span className="text-xs font-bold text-orange-400">P</span>
+        <div className="flex items-center gap-2.5">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 shadow-md shadow-blue-600/30">
+            <span className="text-sm font-bold text-white">P</span>
           </div>
-          <span className="font-mono text-sm font-bold">
-            <span className="text-orange-400">Praktikum</span>
-            <span className="text-white">Finder</span>
+          <span className="text-sm font-bold tracking-tight">
+            <span className="text-blue-600">Praktikum</span>
+            <span className="text-gray-900">Finder</span>
           </span>
         </div>
 
         <div className="flex items-center gap-4">
-          <span className="hidden font-mono text-[11px] text-slate-600 sm:block">
+          <span className="hidden text-xs text-gray-400 sm:block">
             Hannover &amp; Umgebung
           </span>
           <a
             href="mailto:giorgio.dettmar@gmx.de"
-            className="rounded-md border border-white/8 bg-white/[0.03] px-3 py-1.5 font-mono text-[11px] text-slate-400 transition-all hover:border-orange-500/30 hover:text-orange-400"
+            className="rounded-lg border border-blue-600 px-4 py-1.5 text-xs font-semibold text-blue-600 transition-all hover:bg-blue-600 hover:text-white"
           >
             Kontakt
           </a>

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { SlidersHorizontal } from "lucide-react";
 import { companies, uniqueOrte } from "../data/companies";
 import CompanyCard from "./CompanyCard";
 import SearchBar from "./SearchBar";
@@ -35,14 +34,9 @@ export default function CompanyList() {
           <SearchBar
             value={query}
             onChange={setQuery}
-            placeholder="Name, PLZ, Ort, Ansprechpartner…"
+            placeholder="Name, PLZ, Ort suchen…"
           />
-          <div className="flex items-center gap-2 text-slate-600 sm:hidden">
-            <SlidersHorizontal className="h-4 w-4" />
-            <span className="font-mono text-xs">Filter</span>
-          </div>
         </div>
-
         <FilterBar
           orte={uniqueOrte}
           selected={selectedOrt}
@@ -51,10 +45,10 @@ export default function CompanyList() {
       </div>
 
       {/* Result count */}
-      <div className="mb-5 flex items-center justify-between">
-        <p className="font-mono text-xs text-slate-600">
-          <span className="text-slate-400">{filtered.length}</span> von{" "}
-          {companies.length} Firmen
+      <div className="mb-6 flex items-center justify-between">
+        <p className="text-sm text-gray-500">
+          <span className="font-semibold text-gray-900">{filtered.length}</span>{" "}
+          von {companies.length} Firmen
         </p>
         {hasFilters && (
           <button
@@ -62,7 +56,7 @@ export default function CompanyList() {
               setQuery("");
               setSelectedOrt(null);
             }}
-            className="font-mono text-xs text-orange-400/70 underline underline-offset-2 transition-colors hover:text-orange-400"
+            className="text-xs font-semibold text-blue-600 hover:text-blue-700"
           >
             Filter zurücksetzen
           </button>
@@ -77,14 +71,14 @@ export default function CompanyList() {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center rounded-2xl border border-white/5 bg-white/[0.01] py-24 text-center">
-          <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full border border-white/8 bg-white/[0.03]">
-            <SlidersHorizontal className="h-5 w-5 text-slate-600" />
+        <div className="flex flex-col items-center rounded-2xl border border-gray-200 bg-white py-24 text-center">
+          <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-50">
+            <span className="text-2xl">🔍</span>
           </div>
-          <p className="font-mono text-sm text-slate-500">
+          <p className="text-sm font-semibold text-gray-700">
             Keine Firmen gefunden
           </p>
-          <p className="mt-1 font-mono text-xs text-slate-700">
+          <p className="mt-1 text-xs text-gray-400">
             Versuche andere Suchbegriffe
           </p>
           <button
@@ -92,7 +86,7 @@ export default function CompanyList() {
               setQuery("");
               setSelectedOrt(null);
             }}
-            className="mt-4 rounded-lg border border-orange-500/20 bg-orange-500/8 px-4 py-2 font-mono text-xs text-orange-400 transition-all hover:border-orange-500/40 hover:text-orange-300"
+            className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-xs font-semibold text-white hover:bg-blue-700"
           >
             Filter zurücksetzen
           </button>
